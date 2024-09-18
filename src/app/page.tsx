@@ -1,101 +1,156 @@
-import Image from "next/image";
+'use client'
+// import Image from "next/image";
+import { useState } from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [age, setAge] = useState('');
+  const [isWhitelisted, setIsWhitelisted] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value);
+  };
+
+  const handleWhitelist = () => {
+    setIsWhitelisted(true);
+  }
+  return (
+    <div className="bg-image h-screen flex justify-center items-center">
+      <main className="w-1/2 gap-8 flex flex-col justify-between border p-8 rounded-2xl backdrop-blur-xl">
+
+        <div className="flex justify-between">
+          <button className="border py-2 px-7 rounded-lg bg-white/10 hover:bg-white/15 transition">
+            Lottery
+          </button>
+
+          <div className="flex gap-4 items-center">
+            <p className="text-2xl">
+              Tickets
+            </p>
+            <div className="border p-2 rounded-lg bg-white/10 ">
+              0/10
+            </div>
+            <button className="border py-2 px-7 rounded-lg bg-white/10 hover:bg-white/15 transition">
+              Wallet
+            </button>
+          </div>
+        </div>
+
+        <div className="h-1/2">
+          <p className="text-3xl mb-2">Round #2</p>
+          <div className="border rounded-xl p-4 bg-white/5 gap-5 grid grid-cols-2 grid-rows-2">
+            <div className="grid gap-2 place-items-center">
+              <p className="text-xl">
+                Prize Pool
+              </p>
+              <button className="border rounded-lg py-4 w-full text-2xl bg-white/10 hover:bg-white/15 transition">
+                500 ICE
+              </button>
+            </div>
+
+            <div className="grid gap-2 place-items-center">
+              <p className="text-xl">
+                Deadline
+              </p>
+              <button className="border rounded-lg py-4 w-full text-2xl bg-white/10 hover:bg-white/15 transition">
+                20m:30s
+              </button>
+            </div>
+
+            <div className="grid gap-2 place-items-center">
+              <p className="text-xl">
+                Ticket
+              </p>
+              <button className="border rounded-lg py-4 w-full text-2xl bg-white/10 hover:bg-white/15 transition">
+                Sold: 7 <br /> Price 1 ICE
+              </button>
+            </div>
+
+            <div className="grid gap-2 place-items-center">
+              <p className="text-xl">
+                Last Win
+              </p>
+              <button className="border rounded-lg py-4 w-full text-2xl bg-white/10 hover:bg-white/15 transition">
+                Amount: 15.5 ICE <br /> User: 0x653...764
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-evenly items-center">
+          <div className="flex gap-2 items-center justify-center">
+            <button className='text-4xl grid place-items-center'>
+              -
+            </button>
+            <div className="border rounded-md px-7 text-xl py-1">3</div>
+            <button className='text-4xl grid place-items-center'>
+              +
+            </button>
+          </div>
+          <div className='relative'>
+            <button className="border px-7 py-1 text-xl rounded-md">
+              3
+            </button>
+            <div className="absolute text-xs bottom-[-20px]">Balance: 456</div>
+          </div>
+          <div>
+            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+              <InputLabel
+                id="demo-select-small-label"
+                sx={{
+                  color: "white",
+                  '&.Mui-focused': {
+                    color: 'white',  // Color when the label floats (on focus)
+                  },
+                }}
+              >Age</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-small"
+                value={age}
+                label="Age"
+                onChange={handleChange}
+                sx={{
+                  color: 'white',
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'white',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'white',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'white',
+                  },
+                  '.MuiSelect-icon': {
+                    color: 'white',  // Arrow icon color
+                  },
+                }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+
+        <div>
+          {!isWhitelisted ?
+            <button onClick={handleWhitelist} className='border w-full text-4xl py-4 rounded-xl font-bold bg-white/10 hover:bg-white/20 transition'>
+              Whitelist
+            </button>
+            : <button className='border w-full text-4xl py-4 rounded-xl font-bold bg-white/10 hover:bg-white/20 transition'>
+              Approve
+            </button>   
+          }
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
