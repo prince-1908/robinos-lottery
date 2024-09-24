@@ -2,13 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   color: white;
+  background-color: black;
 }
 
 .bg-image {
-  background: url("/bg.png") no-repeat center center;
+  background: url("/igloo13.jpg") no-repeat center center;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+}
+
+.bg-aurora {
+  background: url("/aurora_b.png") no-repeat center center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.container-shadow {
+  box-shadow: 0px 0px 500px 100px black;
+}
+
+.button-shadow-hover:hover {
+  box-shadow: 0px 0px 50px 2px rgba(255, 255, 255, 0.1);
+}
+
+.icecard {
+  backdrop-filter: blur(1px) saturate(180%);
+  -webkit-backdrop-filter: blur(1px) saturate(180%);
+  /* background-color: rgba(172, 172, 211, 0.30); */
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: auto;
+}
+
+.bg-darkblue {
+  background-color: #131928;
+}
+
+.bg-blue-button {
+  background: #5161f2;
+  transition: all 50ms ease-in-out;
+}
+
+.bg-blue-button:hover {
+  background: #5161f27d;
+}
+
+.bg-blue-button2 {
+  background-color: #5161f2;
+  font-weight: 500;
+}
+
+.bg-blue-button2:hover {
+  background-color: transparent;
+  color: #5161f2;
+  font-weight: 500;
+  outline: 4px solid #5161f2;
+  outline-offset: -4px;
+}
+
+.blue-invert {
+  color: #5161f2;
+  font-weight: 500;
+  outline: 4px solid #5161f2;
+  outline-offset: -4px;
+}
+
+.white-invert{
+  color: white;
+  font-weight: 500;
+  outline: 4px solid white;
+  outline-offset: -4px;
+}
+
+.text-blue{
+  color: #5161f2;
 }
