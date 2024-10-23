@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Sheet,
   SheetContent,
@@ -9,8 +9,14 @@ import {
 } from "@/components/ui/sheet";
 import { SquareMenu } from "lucide-react";
 import WalletButton from "./Wallet_Button";
+import useReadData from "@/hooks/useReadData";
 
 export const Nav = () => {
+  const [lotdata] = useReadData();
+
+  useEffect(() => {
+    console.log(lotdata?.round);
+  }, [lotdata]);
   return (
     <>
       <div className="hidden sm:flex justify-between sm:px-8 md:px-16 lg:px-40 xl:px-72">
@@ -20,7 +26,7 @@ export const Nav = () => {
         <div className="flex gap-4 items-center">
           <p className="text-4xl font-semibold">Tickets</p>
           <div className="blue-invert rounded-lg px-10 py-[0.66rem] font-semibold text-2xl">
-            0
+            {Number(lotdata?.userTicketsCount)}
           </div>
           <div className="">
             <WalletButton />
@@ -39,7 +45,7 @@ export const Nav = () => {
                 <div className="flex gap-4 pb-4">
                   <p className="text-2xl text-white font-semibold">Tickets</p>
                   <div className="border-2 border-white text-white px-4 rounded-xl font-semibold text-2xl">
-                    0
+                  {Number(lotdata?.userTicketsCount)}
                   </div>
                 </div>
               </SheetTitle>
@@ -49,9 +55,9 @@ export const Nav = () => {
                 <button className="bg-blue-button rounded-lg text-white font-semibold text-2xl py-2">
                   Lottery
                 </button>
-                <button className="bg-blue-button rounded-lg font-semibold text-2xl text-white py-2">
-                  Wallet
-                </button>
+                <div className="">
+            <WalletButton />
+          </div>
               </SheetDescription>
             </SheetHeader>
           </SheetContent>

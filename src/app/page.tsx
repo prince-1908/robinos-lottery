@@ -10,6 +10,9 @@ import Image from "next/image";
 import { Nav } from "@/components/Nav";
 import { useMediaQuery } from "@mui/material";
 import useReadData from "@/hooks/useReadData";
+import { useAccount } from "wagmi";
+import { convertUnixToHours, shortenString } from "@/function/miscFunction";
+import useSubscribe from "@/hooks/useSubscribe";
 
 export default function Home() {
   const [age, setAge] = useState<string>("");
@@ -17,10 +20,24 @@ export default function Home() {
   const [value, setValue] = useState<number>(3);
   const isMobile = useMediaQuery("(max-width:768px)");
   const [lotdata] = useReadData();
+  const [useSubscribeData]=useSubscribe();
+  const { address } = useAccount();
+  const [hours,setHour]=useState(0);
+  const [minutes,setMinutes]=useState(0);
+  const [seconds,setSeconds]=useState(0);
 
+   
   useEffect(() => {
     console.log(lotdata?.round);
-  }, [lotdata]);
+    if(lotdata){
+    const {hours,minutes,seconds}=convertUnixToHours(lotdata.deadline);
+    setHour(hours);
+    setMinutes(minutes);
+    setSeconds(seconds);
+
+
+    }
+  }, [lotdata,address]);
 
   const handleReduce = () => {
     setValue(value - 1);
@@ -34,12 +51,12 @@ export default function Home() {
   };
 
   const handleWhitelist = () => {
-    setIsWhitelisted(true);
+    useSubscribeData();
   };
   return (
     <div className="md:h-screen flex justify-center items-center pb-16 md:pb-0">
       <main className="w-full h-full container-shadow grid place-items-center">
-        <div className="gap-8 flex flex-col justify-between py-8  w-full relative">
+        <div className="gap-8 flex flex-col justify-between py-8  w-full relative">``
           <Nav />
 
           <div className="absolute z-[-1000] top-[75px] h-[70%] w-full">
@@ -56,30 +73,30 @@ export default function Home() {
           </div>
 
           <div className="h-1/2 px-4 sm:px-8 md:px-16 lg:px-40 xl:px-72">
-            <p className="text-5xl font-bold mb-2">{lotdata?.round}</p>
+            <p className="text-5xl font-bold mb-2">{Number(lotdata?.round)}</p>
             <div className="border-t pt-8 p-4  gap-8 md:gap-5 grid grid-cols-1 md:grid-cols-2 grid-rows-2">
               <div className="grid gap-2 place-items-center">
                 <p className="text-xl">Prize Pool</p>
                 <button className="rounded-lg py-4 w-full text-2xl font-semibold bg-blue-button transition">
-                  500 ICE
+                  {(Number(lotdata?.price)/10**18)*(Number(lotdata?.totalTicketsSold))} ICE
                 </button>
               </div>
               <div className="grid gap-2 place-items-center">
                 <p className="text-xl">Deadline</p>
                 <button className=" rounded-lg py-4 w-full text-2xl bg-blue-button font-semibold transition">
-                  20m:30s
+                  {hours}h:{minutes}m:{seconds}s
                 </button>
               </div>
               <div className="grid gap-2 place-items-center">
                 <p className="text-xl">Ticket</p>
                 <button className="rounded-lg py-4 w-full text-2xl bg-blue-button font-semibold transition">
-                  Sold: 7 <br /> Price 1 ICE
+                  Sold: {Number(lotdata?.totalTicketsSold)} <br /> Price {Number(lotdata?.price)/10**18} ICE
                 </button>
               </div>
               <div className="grid gap-2 place-items-center">
                 <p className="text-xl">Last Win</p>
                 <button className="rounded-lg py-4 w-full text-2xl bg-blue-button font-semibold transition">
-                  Amount: 15.5 ICE <br /> User: 0x653...764
+                  Amount: {Number(lotdata?.lastWinAmount)/10**18} ICE <br /> User:{address?shortenString(address):""} 
                 </button>
               </div>
             </div>
@@ -165,7 +182,7 @@ export default function Home() {
             </div>
           </div>
           <div className="px-4 sm:px-8 md:px-16 lg:px-40 xl:px-72">
-            {!isWhitelisted ? (
+            {!lotdata?.whitelisted? (
               <button
                 onClick={handleWhitelist}
                 className="w-full text-4xl py-4 rounded-xl font-bold bg-blue-button transition"
