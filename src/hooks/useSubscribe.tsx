@@ -11,9 +11,8 @@ export default function useSubscribe() {
   const {data:hash,writeContractAsync}=useWriteContract()
   const { address } = useAccount();
   const { chainId } = useAccount();
-  const [lotdata, setLotdata] = useState<any>();
   async function useSubscribeData() {
-    const subscribe: any = await writeContractAsync({
+    const subscribe = await writeContractAsync({
       abi: LOTTERY_ABI,
       address: "0xd58B1AE005B3c99266Bb005C9D4256cd69d24be9",
       functionName: "subscribe",

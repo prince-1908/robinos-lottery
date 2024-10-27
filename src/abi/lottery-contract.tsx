@@ -1,4 +1,4 @@
-const LOTTERY_ABI = [
+const ERC20_ABI = [
   {
     inputs: [
       {
@@ -818,4 +818,4 @@ const LOTTERY_ABI = [
   },
 ];
 
-export default LOTTERY_ABI;
+export default ERC20_ABI;
