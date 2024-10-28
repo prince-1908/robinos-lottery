@@ -136,7 +136,13 @@ export default function Home() {
                 onClick={HandleWhitelist}
                 className="w-full text-4xl py-4 rounded-xl font-bold bg-blue-button transition"
               >
-                Whitelist
+                {isLoadingSubscribe ? (
+                    <div className="flex items-center justify-center">
+                      <Blocks height="50" width="50" color="#4fa94d" ariaLabel="blocks-loading" visible={true} />
+                    </div>
+                  ) : (
+                    "Subscribe"
+                  )}
               </button>
             ) : (
               <div className="flex justify-between">
