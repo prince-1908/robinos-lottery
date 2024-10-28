@@ -43,7 +43,7 @@ export default function useReadData(): [lotteryDatas, () => Promise<void>] {
   const readLotteryData = useCallback(async () => {
     const lotteryData = await readContract(config, {
       abi: LOTTERY_ABI,
-      address: "0xd58Bbe9",
+      address: "0xd58B1AE005B3c99266Bb005C9D4256cd69d24be9",
       functionName: "getAllData",
       args: [address || zeroAddress],
     }) as lotteryDatas;

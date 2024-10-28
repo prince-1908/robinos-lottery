@@ -12,12 +12,12 @@ import useApprove from "@/hooks/useApprove";
 import { Blocks } from 'react-loader-spinner';
 
 export default function Home() {
-  const [value, setValue] = useState<number>(3);
+  const [value, setValue] = useState<number>(1);
   const [lotdata, readLotteryData] = useReadData();
   const { address } = useAccount();
   const { useBuyData, isLoadingBuy } = useBuy(); // Call the useBuy hook here
   const { useApproveIce, isLoadingApprove } = useApprove(); // Call the useApprove hook here
-  const [useSubscribeData] = useSubscribe(); // Call the useSubscribe hook here
+  const {useSubscribeData,isLoadingSubscribe}= useSubscribe(); // Call the useSubscribe hook here
   
   const [days, setDays] = useState(0);
   const [hours, setHour] = useState(0);
@@ -55,6 +55,8 @@ export default function Home() {
 
   function HandleWhitelist() {
     useSubscribeData();
+    readLotteryData();
+
   }
 
   return (
