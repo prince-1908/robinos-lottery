@@ -9,14 +9,15 @@ import {
 } from "@/components/ui/sheet";
 import { SquareMenu } from "lucide-react";
 import WalletButton from "./Wallet_Button";
+import { useAccount } from "wagmi";
 interface MyComponentProps {
   lotteryData: number;
 }
 export const Nav:React.FC<MyComponentProps>= ({lotteryData}) => {
-  
+  const { isConnected } = useAccount();
   useEffect(() => {
     
-  }, []);
+  }, [isConnected]);
   return (
     <>
       <div className="hidden sm:flex justify-between sm:px-8 md:px-16 lg:px-40 xl:px-72">

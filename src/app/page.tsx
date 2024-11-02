@@ -38,6 +38,7 @@ export default function Home() {
   async function HandleBuy() {
     await useBuyData(value);
     readLotteryData();
+    setIsApproved(false);
   }
 
   async function HandleApprove() {
@@ -83,7 +84,7 @@ export default function Home() {
               <div className="grid gap-2 place-items-center">
                 <p className="text-xl">Prize Pool</p>
                 <button className="rounded-lg py-4 w-full text-2xl font-semibold bg-blue-button transition">
-                  {(Number(lotdata?.price) / 10 ** 18) * (Number(lotdata?.totalTicketsSold))} ICE
+                  {(Number(lotdata?.price) / 10 ** 18) * (Number(lotdata?.ticketsCount))} ICE
                 </button>
               </div>
               <div className="grid gap-2 place-items-center">
@@ -117,13 +118,15 @@ export default function Home() {
             <div className="flex flex-col gap-2 items-center w-full md:w-auto">
               <label className="text-xl">Number of Lottery Tickets</label>
               <div className="flex gap-2 items-center">
-                <button className="text-4xl grid place-items-center" onClick={handleReduce}>
+                {value>0 && (<button className="text-4xl grid place-items-center" onClick={()=>{handleReduce();setIsApproved(false)}}>
+                  
                   <Minus />
-                </button>
+                </button>)}
+               
                 <div className="white-invert rounded-xl px-7 text-xl py-1 text-center">
                   {value}
                 </div>
-                <button className="text-4xl grid place-items-center" onClick={handleIncrease}>
+                <button className="text-4xl grid place-items-center" onClick={()=>{handleIncrease();setIsApproved(false)}}>
                   <Plus />
                 </button>
               </div>
