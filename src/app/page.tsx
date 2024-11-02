@@ -118,7 +118,7 @@ export default function Home() {
             <div className="flex flex-col gap-2 items-center w-full md:w-auto">
               <label className="text-xl">Number of Lottery Tickets</label>
               <div className="flex gap-2 items-center">
-                {value>0 && (<button className="text-4xl grid place-items-center" onClick={()=>{handleReduce();setIsApproved(false)}}>
+                {value>1 && (<button className="text-4xl grid place-items-center" onClick={()=>{handleReduce();setIsApproved(false)}}>
                   
                   <Minus />
                 </button>)}
