@@ -118,10 +118,10 @@ export default function Home() {
             <div className="flex flex-col gap-2 items-center w-full md:w-auto">
               <label className="text-xl">Number of Lottery Tickets</label>
               <div className="flex gap-2 items-center">
-                {value>1 && (<button className="text-4xl grid place-items-center" onClick={()=>{handleReduce();setIsApproved(false)}}>
+                <button className="text-4xl grid place-items-center" onClick={()=>{handleReduce();setIsApproved(false)}} disabled={value <=1}>
                   
-                  <Minus />
-                </button>)}
+                <Minus/>
+                </button>
                
                 <div className="white-invert rounded-xl px-7 text-xl py-1 text-center">
                   {value}
